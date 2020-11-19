@@ -1,0 +1,139 @@
+<!doctype  html>
+<html>
+		<head>
+				<title>Parsing Results</title>
+				
+				<meta charset="utf-8">
+				<meta name="viewport" content="width-device-width, initial-scale=1">
+				<script type="text/javascript" src="{{url_for('static',filename='bootstrap.min.js')}}"></script>
+				<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap.min.css')}}">
+				<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='jquery.js')}}">
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		</head>
+		
+		<body>
+				<div class="container">
+					<div class="col-md-12">
+					
+						<div class="col-md-12 well">
+							<h2 align=center class="text-danger">Parsing Results</h2>
+						</div>
+						
+						<div class="col-md-6">
+							<a href="{{url_for('upload')}}" class="btn btn-danger"><span class="glyphicon glyphicon-home"></span> Home</a>
+						</div>
+					
+						<div class="col-md-12"></div>
+						<div class="col-md-12"></div>
+						<div class="col-md-12"></div>
+						<div class="col-md-12"></div>
+						
+						<table class="table table-bordered">
+							
+							<tbody>
+								<tr>
+									<th>Name<td>{{name}}</td>
+								</tr>
+								
+								<tr>
+									<th>Mobile<td>{{mob}}</td>
+								</tr>
+								
+								<tr>
+									<th>E-Mail<td>{{mail}}</td>
+								</tr>
+							
+								<tr>
+									<th>Linkedin<td>{{linkin}}</td>
+								</tr>
+								
+								<tr>
+									<th>Total no.of Pages<td>{{pages}}</td>
+								</tr>
+								
+								<tr>
+									<th>Textlines in each page<td>{{lines}}</td>
+								</tr>
+								
+								<tr>
+									<th>Characters in each page<td>{{char}}</td>
+								</tr>
+								
+								<tr>
+									<th>FontStyle<td>{{font}}</td>
+								</tr>
+								
+								<tr>
+									<th>Font Size<td>{{f_size}}</td>
+								</tr>
+								
+								<tr>
+									<th>Tables<td>{{table}}</td>
+								</tr>
+								
+								<tr>
+									<th>Images<td>{{image}}</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						
+						<div class="col-md-6">
+							<a onclick="exportTableToCSV('Resume_details.csv')" class="btn btn-danger">
+							<span class="glyphicon glyphicon-arrow-down"></span> Download</a>
+						</div>
+						
+						
+						
+					</div>
+				</div>
+		</body>
+		
+				<script>
+				
+					function downloadCSV(csv, filename) {
+						var csvFile;
+						var downloadLink;
+
+						// CSV file
+						csvFile = new Blob([csv], {type: "text/csv"});
+
+						// Download link
+						downloadLink = document.createElement("a");
+
+						// File name
+						downloadLink.download = filename;
+
+						// Create a link to the file
+						downloadLink.href = window.URL.createObjectURL(csvFile);
+
+						// Hide download link
+						downloadLink.style.display = "none";
+
+						// Add the link to DOM
+						document.body.appendChild(downloadLink);
+
+						// Click download link
+						downloadLink.click();
+					}
+					
+					function exportTableToCSV(filename) {
+						var csv = [];
+						var rows = document.querySelectorAll("table tr");
+						
+						for (var i = 0; i < rows.length; i++) {
+							var row = [], cols = rows[i].querySelectorAll("td, th");
+							
+							for (var j = 0; j < cols.length; j++) 
+								row.push(cols[j].innerText);
+							
+							csv.push(row.join(","));        
+						}
+
+						// Download CSV file
+						downloadCSV(csv.join("\n"), filename);
+					}
+	
+				</script>				
+		</body>
+</html>

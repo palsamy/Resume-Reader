@@ -1,0 +1,33 @@
+<!doctype  html>
+<html>
+		<head>
+				<title>Resume Parser</title>
+				
+				<meta charset="utf-8">
+				<meta name="viewport" content="width-device-width, initial-scale=1">
+				<script type="text/javascript" src="{{url_for('static',filename='bootstrap.min.js')}}"></script>
+				<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap.min.css')}}">
+				<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='jquery.js')}}">
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		</head>
+		
+		<body>
+			<div class="container">
+				<div class="jumbotron">
+					<h1 align=center class="text-primary">Resume Parser</h1>
+				</div>
+				
+				<div class="col-md-12 well">
+					<form action = "/success" method = "post" enctype="multipart/form-data">  
+						<input type="file" name="file" /><br>
+						
+						<button type="submit"  name="submit" class="btn btn-danger">
+							<span class="glyphicon glyphicon-arrow-up"></span> Upload
+						</button>
+					</form>
+						
+				</div>	
+			</div>
+					  
+</body>  
+</html>  
